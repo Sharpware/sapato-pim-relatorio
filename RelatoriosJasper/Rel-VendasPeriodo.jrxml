@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rel-VendasPeriodo" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="969d3853-a19b-453e-ba51-5630e51acbd4">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#73B0E6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#CFDBE6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<subDataset name="VendasPeriodo" uuid="91929307-11a8-4450-aa66-a0256be0903b">
+		<queryString>
+			<![CDATA[SELECT
+     data_venda AS Data,
+     valor_total AS Valor,
+     tipo_venda AS Tipo,
+     f.`nome` AS Vendedor
+FROM
+     `funcionario` f INNER JOIN `venda` v ON f.`id` = v.`id_funcionario`
+]]>
+		</queryString>
+		<field name="Data" class="java.sql.Date"/>
+		<field name="Valor" class="java.lang.Double"/>
+		<field name="Tipo" class="java.lang.String"/>
+		<field name="Vendedor" class="java.lang.String"/>
+		<group name="Vendedor">
+			<groupExpression><![CDATA[$F{Vendedor}]]></groupExpression>
+		</group>
+		<group name="Data">
+			<groupExpression><![CDATA[$F{Data}]]></groupExpression>
+		</group>
+	</subDataset>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="64" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="60" width="554" height="1" uuid="495f227a-f634-4f6e-bfc5-96e551882793"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="0" width="554" height="32" uuid="22c509d4-93f0-4e46-9a1c-f9fae7d72917"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório vendas por período]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="32" width="65" height="20" uuid="5ea30c42-d13e-4aa3-be08-e21950518a83"/>
+				<text><![CDATA[Emitido em: ]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="65" y="32" width="173" height="20" uuid="d56438c5-b167-4544-bbf1-f3f09419be21"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="238" y="32" width="128" height="20" uuid="494c256c-75b0-4fd2-a565-8841a906a92a"/>
+				<text><![CDATA[Referênte ao período de:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="366" y="32" width="81" height="20" uuid="38c950ec-18de-42b9-bb8b-5f2c647c698b"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="447" y="32" width="22" height="20" uuid="b1e47f8c-c502-4a2a-bd9e-02b0eedd66e0"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[ á ]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="469" y="32" width="85" height="20" uuid="5a307db8-f44e-45b1-96b7-24248a097b60"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="21" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<elementGroup/>
+			<componentElement>
+				<reportElement key="table" style="table" x="0" y="0" width="555" height="125" uuid="aa8a735c-b8fd-4fc9-ad01-effc191a1d58"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="VendasPeriodo" uuid="049b3fe9-49c1-468b-9a93-a2c6299c1f7e">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="90" uuid="eb512ea1-8203-450c-999f-4a35ea86cd96">
+						<jr:tableHeader style="table_TH" height="30"/>
+						<jr:tableFooter style="table_TH" height="30"/>
+						<jr:groupHeader groupName="Vendedor">
+							<jr:cell style="table_TH" height="30">
+								<textField>
+									<reportElement x="0" y="0" width="90" height="20" uuid="85b14f61-c70c-4c70-92b1-ca5db9c1b7ef"/>
+									<textElement textAlignment="Center">
+										<font size="12"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{Vendedor}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupHeader groupName="Data">
+							<jr:cell style="table_TH" height="30">
+								<textField>
+									<reportElement x="0" y="0" width="90" height="20" uuid="7b162592-c4df-46cc-ad32-a4f4f4afa217"/>
+									<textElement textAlignment="Center">
+										<font size="12"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{Data}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:columnHeader style="table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="c084c5e1-8116-47f0-bf3c-cee6ce470ed5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Data]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table_CH" height="30"/>
+						<jr:detailCell style="table_TD" height="20">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="af2c8cda-5567-4ab5-9862-1a10db26bb41"/>
+								<textElement textAlignment="Center">
+									<font size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Data}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="4b2f18a4-ae19-44dd-a8a3-eea7d0712970">
+						<jr:tableHeader style="table_TH" height="30"/>
+						<jr:tableFooter style="table_TH" height="30"/>
+						<jr:groupHeader groupName="Vendedor">
+							<jr:cell style="table_TH" height="30">
+								<textField>
+									<reportElement x="0" y="0" width="90" height="20" uuid="be200070-4a94-4bc2-b297-45ef90577934"/>
+									<textElement textAlignment="Center">
+										<font size="12"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{Vendedor}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupHeader groupName="Data">
+							<jr:cell style="table_TH" height="30">
+								<textField>
+									<reportElement x="0" y="0" width="90" height="20" uuid="22c5a05a-d16b-42ff-b72c-104215814e37"/>
+									<textElement textAlignment="Center">
+										<font size="12"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{Data}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:columnHeader style="table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="30c7f6cc-034a-4362-a83a-1645f9c02d49"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Valor]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table_CH" height="30"/>
+						<jr:detailCell style="table_TD" height="20">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="e6bd0426-023d-4ca3-b189-7154fea20732"/>
+								<textElement textAlignment="Right">
+									<font size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Valor}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="51c22b48-3c61-4a42-bbd6-6ae66ba4d72c">
+						<jr:tableHeader style="table_TH" height="30"/>
+						<jr:tableFooter style="table_TH" height="30"/>
+						<jr:groupHeader groupName="Vendedor">
+							<jr:cell style="table_TH" height="30">
+								<textField>
+									<reportElement x="0" y="0" width="90" height="20" uuid="a8424acb-7a19-49b4-b6c4-7377f21cf250"/>
+									<textElement textAlignment="Center">
+										<font size="12"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{Vendedor}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupHeader groupName="Data">
+							<jr:cell style="table_TH" height="30">
+								<textField>
+									<reportElement x="0" y="0" width="90" height="20" uuid="5f831031-f680-4e4a-beef-01ff6b8e1fca"/>
+									<textElement textAlignment="Center">
+										<font size="12"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{Data}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:columnHeader style="table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="1159b0b3-6031-4da4-9fde-4ff8f3ae2877"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Tipo]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table_CH" height="30"/>
+						<jr:detailCell style="table_TD" height="20">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="53e9989a-1022-421a-acd1-cb6a155985e6"/>
+								<textElement textAlignment="Center">
+									<font size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Tipo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="a8861a20-f550-45ee-bf3e-ae574db73ff4">
+						<jr:tableHeader style="table_TH" height="30"/>
+						<jr:tableFooter style="table_TH" height="30"/>
+						<jr:groupHeader groupName="Vendedor">
+							<jr:cell style="table_TH" height="30">
+								<textField>
+									<reportElement x="0" y="0" width="90" height="20" uuid="ae6b6a14-57cd-4537-900c-41bd41d7195d"/>
+									<textElement textAlignment="Center">
+										<font size="12"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{Vendedor}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupHeader groupName="Data">
+							<jr:cell style="table_TH" height="30">
+								<textField>
+									<reportElement x="0" y="0" width="90" height="20" uuid="665d7b08-5ca9-4479-bb29-28d7d723cd66"/>
+									<textElement textAlignment="Center">
+										<font size="12"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{Data}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:columnHeader style="table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="e236346c-ee5f-4442-8340-04f07d757a2c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Vendedor]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table_CH" height="30"/>
+						<jr:detailCell style="table_TD" height="20">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="27ac4d5b-4111-40c8-82d9-a789ce086a67"/>
+								<textElement textAlignment="Center">
+									<font size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Vendedor}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="144" splitType="Stretch">
+			<textField>
+				<reportElement x="333" y="7" width="100" height="20" uuid="4d9f343a-68d9-4dfd-ad0b-5694773a3885"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="454" y="7" width="100" height="20" uuid="812d41a8-d3a4-4bab-acaa-9698afb5f877"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="7" width="43" height="20" uuid="c024651f-bf5c-421e-800b-0c119d758136"/>
+				<text><![CDATA[Página: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="433" y="7" width="21" height="20" uuid="0a9fb7c7-69a5-4b09-acb9-f377f115ff88"/>
+				<text><![CDATA[ de ]]></text>
+			</staticText>
+			<crosstab>
+				<reportElement x="0" y="0" width="238" height="106" uuid="b464648d-7cc3-451d-8bd5-39bd55b52914"/>
+				<crosstabDataset>
+					<dataset>
+						<datasetRun subDataset="VendasPeriodo" uuid="7a416cc3-9ade-4193-8a6d-06353cbcae1c">
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+					</dataset>
+				</crosstabDataset>
+				<rowGroup name="Vendedor" width="70" totalPosition="End">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{Vendedor}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents backcolor="#73B0E6" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="70" height="25" uuid="0576b5b9-ece1-4fa4-b7fb-cad7e9269817"/>
+								<textFieldExpression><![CDATA[$V{Vendedor}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents backcolor="#406280" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="140" height="25" forecolor="#FFFFFF" uuid="a7b23780-0707-4407-a005-b704e1de66ba"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Total Vendedor]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="Data" width="70" totalPosition="End">
+					<bucket class="java.sql.Date">
+						<bucketExpression><![CDATA[$F{Data}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents backcolor="#73B0E6" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="70" height="25" uuid="bf902b54-67f0-457b-b119-fe4ffde8b101"/>
+								<textFieldExpression><![CDATA[$V{Data}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents backcolor="#CFDBE6" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="25" uuid="e7526d89-9c8f-4dd1-aa7b-fe74b447162a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Total Data]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="Data1" height="30" totalPosition="End">
+					<bucket class="java.sql.Date">
+						<bucketExpression><![CDATA[$F{Data}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents backcolor="#73B0E6" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="30" uuid="8e2109da-d0e8-459f-ba1c-a19f9a4a576e"/>
+								<textFieldExpression><![CDATA[$V{Data1}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents backcolor="#CFDBE6" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30" uuid="1805436a-2d93-43b8-9b35-d70d21fb1c68"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Total Data1]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="ValorMeasure" class="java.lang.Double" calculation="Sum">
+					<measureExpression><![CDATA[$F{Valor}]]></measureExpression>
+				</measure>
+				<crosstabCell width="50" height="25">
+					<cellContents>
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" uuid="ec6c4758-cc70-42da-8a2b-cebabaf10406"/>
+							<textFieldExpression><![CDATA[$V{ValorMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell height="25" rowTotalGroup="Vendedor">
+					<cellContents backcolor="#406280" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" forecolor="#FFFFFF" uuid="127a9f15-605e-48f7-8dde-21e92de51230"/>
+							<textFieldExpression><![CDATA[$V{ValorMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="50" columnTotalGroup="Data1">
+					<cellContents backcolor="#CFDBE6" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" uuid="794608d9-d8b5-442c-947a-acb43a9f6db0"/>
+							<textFieldExpression><![CDATA[$V{ValorMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="Vendedor" columnTotalGroup="Data1">
+					<cellContents backcolor="#406280" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" forecolor="#FFFFFF" uuid="fab15c37-b290-424f-b9a1-5efae3467063"/>
+							<textFieldExpression><![CDATA[$V{ValorMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell height="25" rowTotalGroup="Data">
+					<cellContents backcolor="#CFDBE6" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" uuid="704eb342-1a5a-4962-b92d-43ad112fdd9c"/>
+							<textFieldExpression><![CDATA[$V{ValorMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="Data" columnTotalGroup="Data1">
+					<cellContents backcolor="#CFDBE6" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" uuid="e0c8993d-8ee1-4fa2-aad4-016e0c58259f"/>
+							<textFieldExpression><![CDATA[$V{ValorMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+			</crosstab>
+		</band>
+	</pageFooter>
+</jasperReport>
