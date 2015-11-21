@@ -2,7 +2,16 @@ package com.sharpware.sapato.pim.relatorio.controller;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
-import java.sql.SQLException;
+import com.sharpware.sapato.pim.connectionFactory.ConnectionFactory;
+import java.io.FileOutputStream;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
+import net.sf.jasperreports.engine.JRExporter;
+import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
 
 @Controller
 public class RelatorioController{
@@ -39,12 +48,19 @@ public class RelatorioController{
     @Get("/VendasPorVendedor/")
     public void VendasPorVendedor(){
         try{
-            if (true) {
-                
-            }
-            else if (true) {
-                
-            }
+            Map<String, Object> parametros = new HashMap<String, Object>();
+            Connection connexao = new ConnectionFactory().getConnection();
+
+            JasperPrint print = JasperFillManager.fillReport("RelatorioVendasVendedor."
+                    + "jasper", parametros, connexao);
+
+            JRExporter exporter = new JRPdfExporter();
+            exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
+            exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, new FileOutputStream(""
+                    + "RelatorioVendasVendedor.pdf"));
+            exporter.exportReport();
+
+            connexao.close();
         }
         catch(Exception erro){
             System.out.print("Erro ao executar relatório,"
@@ -58,12 +74,7 @@ public class RelatorioController{
         @Get("/VendasPorPeriodo/")
     public void VendasPorPeriodo(){
         try{
-            if (true) {
-                
-            }
-            else if (true) {
-                
-            }
+
         }
         catch(Exception erro){
             System.out.print("Erro ao executar relatório,"

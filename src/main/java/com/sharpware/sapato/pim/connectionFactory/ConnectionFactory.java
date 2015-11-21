@@ -1,4 +1,4 @@
-package com.sharpware.sapato.pim.ConnectionFactory;
+package com.sharpware.sapato.pim.connectionFactory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,7 @@ public class ConnectionFactory {
 
 	public Connection getConnection() {
 		try {
-			return DriverManager.getConnection("jdbc:mysql://localhost/financas", "root", "");
+			return DriverManager.getConnection("jdbc:mysql://localhost/sharpware", "root", "admin");
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
