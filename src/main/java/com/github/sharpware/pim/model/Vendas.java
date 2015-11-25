@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.github.sharpware.model;
+package com.github.sharpware.pim.model;
 
 /**
  *
- * @author root
+ * @author Christopher
  */
-public class Relatorio {
+public class Vendas {
     
     private String dataInicio;
     private String dataFinal;
-    private String NomeVendedor;
+    private String nomeVendedor;
 
     public String getDataInicio() {
         return dataInicio;
@@ -32,10 +32,10 @@ public class Relatorio {
     }
 
     public String getNomeVendedor() {
-        return NomeVendedor;
+        return nomeVendedor;
     }
 
     public void setNomeVendedor(String NomeVendedor) {
-        this.NomeVendedor = NomeVendedor;
+        this.nomeVendedor = NomeVendedor;
     }
 }

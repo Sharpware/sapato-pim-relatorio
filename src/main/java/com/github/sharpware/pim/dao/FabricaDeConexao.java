@@ -1,3 +1,5 @@
+package com.github.sharpware.pim.dao;
+
 /*package com.github.sharpware.dao;
 
 import javax.enterprise.context.ApplicationScoped;

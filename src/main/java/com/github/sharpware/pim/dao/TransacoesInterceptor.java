@@ -1,4 +1,4 @@
-package com.github.sharpware.dao;
+package com.github.sharpware.pim.dao;
 
 import br.com.caelum.vraptor.AroundCall;
 import br.com.caelum.vraptor.Intercepts;
@@ -7,8 +7,7 @@ import br.com.caelum.vraptor.interceptor.SimpleInterceptorStack;
 
 import javax.inject.Inject;
 
-import com.github.sharpware.annotation.Transacional;
-import com.github.sharpware.dao.ConnectionFactory;
+import com.github.sharpware.pim.annotation.Transacional;
 
 @Intercepts
 @AcceptsWithAnnotations(Transacional.class)
